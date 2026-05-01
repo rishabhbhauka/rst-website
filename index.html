@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RST Global Ventures – Electrical Goods Trading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #070e14;
+    --charcoal: #0d1a24;
+    --charcoal2: #102030;
+    --teal: #00c5c8;
+    --teal-glow: rgba(0,197,200,0.13);
+    --white: #e8f4f8;
+    --muted: #7a9aaa;
+    --border: rgba(0,197,200,0.22);
+    --border-dim: rgba(255,255,255,0.06);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--navy); color: var(--white);
+    font-family: 'Barlow', sans-serif; font-weight: 300;
+    line-height: 1.7; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.03; pointer-events: none; z-index: 9999;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 0 5vw; height: 68px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(7,14,20,0.88); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-dim); transition: border-color 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+    font-size: 1.2rem; letter-spacing: 0.04em; color: var(--white);
+    text-decoration: none; display: flex; align-items: center; gap: 10px;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none; font-size: 0.85rem;
+    letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500;
+    transition: color 0.2s; position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1px; background: var(--teal); transition: width 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh; display: flex; align-items: center;
+    position: relative; padding: 120px 5vw 80px; overflow: hidden;
+  }
+  #hero::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(0,197,200,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,197,200,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
+  }
+  #hero::after {
+    content: ''; position: absolute; top: -10%; right: -5%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,197,200,0.1) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 2; max-width: 780px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,197,200,0.08); border: 1px solid var(--border);
+    border-radius: 2px; padding: 6px 14px; font-size: 0.72rem;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal);
+    font-weight: 600; margin-bottom: 28px; opacity: 0; animation: fadeUp 0.6s 0.1s forwards;
+  }
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+    font-size: clamp(3.2rem, 8vw, 7rem); line-height: 0.95;
+    letter-spacing: -0.01em; text-transform: uppercase; margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+  }
+  .hero-title em { font-style: normal; color: var(--teal); display: block; }
+  .hero-sub {
+    font-size: 1.05rem; color: var(--muted); max-width: 540px;
+    line-height: 1.8; margin-bottom: 44px; font-weight: 300;
+    opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
+  }
+  .hero-cta-row {
+    display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s 0.5s forwards;
+  }
+  .btn-primary {
+    background: var(--teal); color: #000; padding: 14px 32px;
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  }
+  .btn-primary:hover { background: #00e0e4; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,197,200,0.35); }
+  .btn-secondary {
+    color: var(--muted); font-size: 0.85rem; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none; font-weight: 500;
+    display: flex; align-items: center; gap: 8px; transition: color 0.2s;
+  }
+  .btn-secondary:hover { color: var(--white); }
+  .btn-secondary .arrow { transition: transform 0.2s; }
+  .btn-secondary:hover .arrow { transform: translateX(4px); }
+  .hero-stats {
+    position: absolute; right: 5vw; bottom: 15%;
+    display: flex; flex-direction: column; gap: 28px;
+    opacity: 0; animation: fadeLeft 0.8s 0.6s forwards;
+  }
+  .stat-item { text-align: right; border-right: 2px solid var(--teal); padding-right: 18px; }
+  .stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2.4rem; color: var(--teal); line-height: 1; }
+  .stat-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+  .scroll-hint {
+    position: absolute; bottom: 32px; left: 5vw;
+    display: flex; align-items: center; gap: 12px;
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); opacity: 0; animation: fadeUp 0.6s 0.9s forwards;
+  }
+  .scroll-line { width: 40px; height: 1px; background: linear-gradient(to right, var(--teal), transparent); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeLeft { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
+
+  /* SECTIONS */
+  section { padding: 100px 5vw; }
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--teal); font-weight: 600; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--teal); }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3.2rem); text-transform: uppercase;
+    line-height: 1.05; letter-spacing: 0.01em; margin-bottom: 20px;
+  }
+
+  /* ABOUT */
+  #about { background: var(--charcoal); position: relative; overflow: hidden; }
+  #about::before {
+    content: ''; position: absolute; left: -100px; top: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,197,200,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; }
+  .about-text p { color: var(--muted); font-size: 1rem; line-height: 1.85; margin-bottom: 18px; }
+  .about-text p strong { color: var(--white); font-weight: 500; }
+  .about-visual { position: relative; }
+  .about-img-frame {
+    width: 100%; aspect-ratio: 4/3; background: var(--charcoal2);
+    border: 1px solid var(--border-dim); position: relative; overflow: hidden;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  }
+  .about-img-frame img { width: 100%; height: 100%; object-fit: cover; opacity: 0.65; filter: grayscale(40%); }
+  .about-img-frame::after { content: ''; position: absolute; top: 0; right: 0; width: 60px; height: 4px; background: var(--teal); }
+  .about-tag {
+    position: absolute; bottom: -20px; left: -20px;
+    background: var(--teal); color: #000; padding: 16px 22px;
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+    font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  }
+
+  /* PRODUCTS */
+  #products { background: var(--navy); position: relative; }
+  #products::after {
+    content: ''; position: absolute; right: 0; top: 0; width: 300px; height: 100%;
+    background: linear-gradient(to left, rgba(0,197,200,0.04), transparent); pointer-events: none;
+  }
+  .products-header { max-width: 1200px; margin: 0 auto 60px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
+  .cat-block { max-width: 1200px; margin: 0 auto 52px; }
+  .cat-divider { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+  .cat-label { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); font-weight: 600; white-space: nowrap; }
+  .cat-line { flex: 1; height: 1px; background: var(--border-dim); }
+  .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 2px; }
+  .product-card {
+    background: var(--charcoal); border: 1px solid var(--border-dim);
+    padding: 30px 24px; position: relative;
+    transition: border-color 0.25s, background 0.25s, transform 0.25s; overflow: hidden;
+  }
+  .product-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 0; height: 2px; background: var(--teal); transition: width 0.35s ease;
+  }
+  .product-card:hover { border-color: var(--border); background: var(--charcoal2); transform: translateY(-4px); }
+  .product-card:hover::before { width: 100%; }
+  .product-icon { font-size: 1.8rem; margin-bottom: 14px; display: block; }
+  .product-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; color: var(--white); }
+  .product-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+  .product-num { position: absolute; top: 14px; right: 18px; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2rem; color: rgba(255,255,255,0.04); line-height: 1; }
+
+  /* CONTACT */
+  #contact { background: var(--charcoal); position: relative; overflow: hidden; }
+  #contact::before {
+    content: ''; position: absolute; right: -100px; bottom: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0,197,200,0.08) 0%, transparent 65%);
+  }
+  .contact-icon {
+    width: 44px; height: 44px; background: var(--teal-glow); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+  }
+  .contact-detail-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); font-weight: 600; margin-bottom: 4px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy); border-top: 1px solid var(--border-dim);
+    padding: 32px 5vw; display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  }
+  .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: 0.05em; text-transform: uppercase; }
+  .footer-copy { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.05em; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--teal); }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-stats { position: static; flex-direction: row; flex-wrap: wrap; margin-top: 48px; animation: fadeUp 0.7s 0.6s forwards; }
+    .stat-item { text-align: left; border-right: none; border-left: 2px solid var(--teal); padding-right: 0; padding-left: 14px; }
+    .products-header { flex-direction: column; align-items: flex-start; }
+    nav { padding: 0 4vw; } .nav-links { gap: 1.5rem; }
+    footer { flex-direction: column; align-items: flex-start; }
+    .scroll-hint { display: none; }
+  }
+  @media (max-width: 480px) {
+    .nav-links { display: none; }
+    .hero-title { font-size: 3rem; }
+    .products-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="With_White_background.png" alt="RST Logo" style="width:36px;height:36px;object-fit:contain;border-radius:50%;" />
+    RST Global Ventures
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">⚡ Electrical Goods Trading &amp; Distribution</div>
+    <div style="display:flex;align-items:center;gap:28px;margin-bottom:8px;">
+      <img src="With_White_background.png" alt="RST Global Ventures"
+        style="width:90px;height:90px;object-fit:contain;border-radius:50%;box-shadow:0 0 30px rgba(0,197,200,0.3);opacity:0;animation:fadeUp 0.7s 0.2s forwards;" />
+      <h1 class="hero-title" style="margin-bottom:0;">RST Global<br><em>Ventures</em></h1>
+    </div>
+    <p class="hero-sub">
+      High-quality electrical goods and safety items for industrial and commercial needs —
+      sourced from trusted manufacturers and delivered across India.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#products" class="btn-primary">View Our Products</a>
+      <a href="#contact" class="btn-secondary">Get in Touch <span class="arrow">→</span></a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-num">30+</div><div class="stat-label">Product Types</div></div>
+    <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Quality Focus</div></div>
+    <div class="stat-item"><div class="stat-num">Pan India</div><div class="stat-label">Delivery</div></div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div>Scroll to explore</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p class="section-label">Who We Are</p>
+      <h2 class="section-title">Built on<br>Excellence &amp;<br>Reliability</h2>
+      <p>At <strong>RST Global Ventures</strong>, we specialise in the trade of high-quality electrical goods, providing essential components for a wide range of electrical applications.</p>
+      <p>With a focus on excellence and reliability, we offer a comprehensive selection of products — from <strong>MCBs, RCCBs, and HRC fuses</strong> to <strong>cables, wires, LED lights, and safety items</strong> — sourced from trusted manufacturers.</p>
+      <p>Our team of experienced professionals ensures every product meets the highest industry standards and customer expectations.</p>
+    </div>
+    <div class="about-visual reveal">
+      <div class="about-img-frame">
+        <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=800&q=80" alt="Electrical professional at work" />
+      </div>
+      <div class="about-tag">Kolkata, India</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="products-header reveal">
+    <div>
+      <p class="section-label">What We Offer</p>
+      <h2 class="section-title">Our Product Range</h2>
+    </div>
+    <p style="color:var(--muted);font-size:0.9rem;max-width:380px;line-height:1.7;">
+      A wide range of high-quality electrical products and safety items for your industrial and commercial needs.
+    </p>
+  </div>
+
+  <!-- Protection & Control -->
+  <div class="cat-block">
+    <div class="cat-divider reveal"><span class="cat-label">Protection &amp; Control</span><div class="cat-line"></div></div>
+    <div class="products-grid">
+      <div class="product-card reveal"><span class="product-num">01</span><span class="product-icon">⚡</span><div class="product-name">MCBs</div><div class="product-desc">Miniature Circuit Breakers for reliable overload and short-circuit protection.</div></div>
+      <div class="product-card reveal"><span class="product-num">02</span><span class="product-icon">🛡️</span><div class="product-name">RCCBs</div><div class="product-desc">Residual Current Circuit Breakers for maximum safety against electrical faults.</div></div>
+      <div class="product-card reveal"><span class="product-num">03</span><span class="product-icon">🔧</span><div class="product-name">HRC Fuses</div><div class="product-desc">High Rupturing Capacity fuses for reliable short-circuit protection in industrial setups.</div></div>
+      <div class="product-card reveal"><span class="product-num">04</span><span class="product-icon">🔌</span><div class="product-name">Switches &amp; Changeover Switches</div><div class="product-desc">Modular, heavy-duty, and changeover switches for residential and industrial use.</div></div>
+      <div class="product-card reveal"><span class="product-num">05</span><span class="product-icon">🔴</span><div class="product-name">Push Buttons &amp; Emergency Push Buttons</div><div class="product-desc">Industrial push buttons and emergency stop variants for safety-critical systems.</div></div>
+      <div class="product-card reveal"><span class="product-num">06</span><span class="product-icon">🏭</span><div class="product-name">Custom Made MDB Panels</div><div class="product-desc">Custom Main Distribution Boards built to your industrial specifications.</div></div>
+    </div>
+  </div>
+
+  <!-- Cables & Wiring -->
+  <div class="cat-block">
+    <div class="cat-divider reveal"><span class="cat-label">Cables &amp; Wiring</span><div class="cat-line"></div></div>
+    <div class="products-grid">
+      <div class="product-card reveal"><span class="product-num">07</span><span class="product-icon">〰️</span><div class="product-name">Cables &amp; Wires</div><div class="product-desc">Flexible and rigid copper wires for all wiring requirements, conforming to IS standards.</div></div>
+      <div class="product-card reveal"><span class="product-num">08</span><span class="product-icon">🔩</span><div class="product-name">Ring Type Aluminum &amp; Copper Cables</div><div class="product-desc">Heavy-duty ring-type cables in aluminum and copper for high-load applications.</div></div>
+      <div class="product-card reveal"><span class="product-num">09</span><span class="product-icon">🏗️</span><div class="product-name">Aluminum Armored Cables</div><div class="product-desc">Armored cables offering mechanical protection for underground and industrial use.</div></div>
+      <div class="product-card reveal"><span class="product-num">10</span><span class="product-icon">🔵</span><div class="product-name">Copper Control Cables</div><div class="product-desc">Flexible copper control cables for instrumentation and automation systems.</div></div>
+      <div class="product-card reveal"><span class="product-num">11</span><span class="product-icon">📐</span><div class="product-name">GI Cable Tray &amp; Ladder</div><div class="product-desc">Galvanized iron cable trays and ladders for organised and safe cable routing.</div></div>
+    </div>
+  </div>
+
+  <!-- Glands, Fittings & Accessories -->
+  <div class="cat-block">
+    <div class="cat-divider reveal"><span class="cat-label">Glands, Fittings &amp; Accessories</span><div class="cat-line"></div></div>
+    <div class="products-grid">
+      <div class="product-card reveal"><span class="product-num">12</span><span class="product-icon">🔗</span><div class="product-name">PVC &amp; DC Cable Glands</div><div class="product-desc">Cable glands in all sizes for secure and weatherproof cable entry points.</div></div>
+      <div class="product-card reveal"><span class="product-num">13</span><span class="product-icon">⭕</span><div class="product-name">Double Compressor Glands</div><div class="product-desc">Double compression cable glands for armored cables in demanding environments.</div></div>
+      <div class="product-card reveal"><span class="product-num">14</span><span class="product-icon">🟢</span><div class="product-name">PG Gland PVC</div><div class="product-desc">PG-type PVC glands for cable entry and strain relief in enclosures.</div></div>
+      <div class="product-card reveal"><span class="product-num">15</span><span class="product-icon">🔌</span><div class="product-name">Copper Flat Sockets</div><div class="product-desc">High-conductivity copper flat sockets for reliable electrical connections.</div></div>
+      <div class="product-card reveal"><span class="product-num">16</span><span class="product-icon">🧰</span><div class="product-name">Cable Jointing Kits</div><div class="product-desc">Complete kits for safe and reliable jointing of LT and HT cables.</div></div>
+      <div class="product-card reveal"><span class="product-num">17</span><span class="product-icon">🎗️</span><div class="product-name">PVC Tapes &amp; Empire Tapes</div><div class="product-desc">All types of PVC insulation tapes and Empire tapes for electrical insulation.</div></div>
+      <div class="product-card reveal"><span class="product-num">18</span><span class="product-icon">📎</span><div class="product-name">GI Saddles &amp; MJ Collars</div><div class="product-desc">Galvanized iron saddles and MJ collars for cable clamping and support.</div></div>
+      <div class="product-card reveal"><span class="product-num">19</span><span class="product-icon">⚪</span><div class="product-name">Poly Pin &amp; Disc Insulators</div><div class="product-desc">Polymer pin and disc insulators for overhead line insulation and support.</div></div>
+    </div>
+  </div>
+
+  <!-- Lighting, Equipment & Others -->
+  <div class="cat-block">
+    <div class="cat-divider reveal"><span class="cat-label">Lighting, Equipment &amp; Others</span><div class="cat-line"></div></div>
+    <div class="products-grid">
+      <div class="product-card reveal"><span class="product-num">20</span><span class="product-icon">💡</span><div class="product-name">LED Lights</div><div class="product-desc">Energy-efficient LED lighting solutions for industrial and commercial spaces.</div></div>
+      <div class="product-card reveal"><span class="product-num">21</span><span class="product-icon">🌀</span><div class="product-name">Ceiling &amp; Wall Mounted Fans</div><div class="product-desc">Industrial and commercial grade ceiling and wall-mounted fans.</div></div>
+      <div class="product-card reveal"><span class="product-num">22</span><span class="product-icon">📏</span><div class="product-name">Multimeters</div><div class="product-desc">Precision multimeters for voltage, current, and resistance measurement.</div></div>
+      <div class="product-card reveal"><span class="product-num">23</span><span class="product-icon">💨</span><div class="product-name">Air Blowers</div><div class="product-desc">Industrial air blowers for cleaning, cooling, and ventilation needs.</div></div>
+      <div class="product-card reveal"><span class="product-num">24</span><span class="product-icon">🔩</span><div class="product-name">HDPE Pipes &amp; Fittings</div><div class="product-desc">High-density polyethylene pipes and fittings for cable ducting and utilities.</div></div>
+      <div class="product-card reveal"><span class="product-num">25</span><span class="product-icon">⚙️</span><div class="product-name">Spare Parts for Cranes</div><div class="product-desc">Electrical spare parts and components for crane maintenance and operations.</div></div>
+      <div class="product-card reveal"><span class="product-num">26</span><span class="product-icon">🧵</span><div class="product-name">Polypropylene Rope &amp; Polyester Belt</div><div class="product-desc">Industrial ropes and belts for rigging, lifting, and heavy-duty applications.</div></div>
+      <div class="product-card reveal" style="border-color:var(--border);background:rgba(0,197,200,0.05);"><span class="product-num">+</span><span class="product-icon">🦺</span><div class="product-name">Safety Items &amp; More</div><div class="product-desc">A broad range of safety equipment. Contact us for your specific requirements.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="reveal" style="text-align:center;margin-bottom:60px;">
+      <p class="section-label" style="justify-content:center;">Get in Touch</p>
+      <h2 class="section-title">Let's Talk<br>Business</h2>
+      <p style="color:var(--muted);font-size:0.95rem;max-width:480px;margin:0 auto;line-height:1.8;">
+        Have a query or bulk requirement? Reach out to us directly — our team is ready to assist.
+      </p>
+    </div>
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px;max-width:900px;margin:0 auto;">
+      <div style="background:var(--charcoal);border:1px solid var(--border-dim);padding:40px 36px;text-align:center;transition:border-color 0.25s,transform 0.25s;" onmouseover="this.style.borderColor='rgba(0,197,200,0.22)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.06)';this.style.transform='translateY(0)'">
+        <div class="contact-icon" style="margin:0 auto 20px;width:54px;height:54px;font-size:1.4rem;">📞</div>
+        <div class="contact-detail-label">Phone</div>
+        <a href="tel:+917979066619" style="display:block;font-size:1.05rem;color:var(--white);margin-top:6px;font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:0.03em;text-decoration:none;">+91 7979066619</a>
+      </div>
+      <div style="background:var(--charcoal);border:1px solid var(--border-dim);padding:40px 36px;text-align:center;transition:border-color 0.25s,transform 0.25s;" onmouseover="this.style.borderColor='rgba(0,197,200,0.22)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.06)';this.style.transform='translateY(0)'">
+        <div class="contact-icon" style="margin:0 auto 20px;width:54px;height:54px;font-size:1.4rem;">✉️</div>
+        <div class="contact-detail-label">Email</div>
+        <a href="mailto:info@rstglobalventures.in" style="display:block;font-size:0.92rem;color:var(--teal);margin-top:6px;text-decoration:none;font-weight:500;">info@rstglobalventures.in</a>
+      </div>
+      <div style="background:var(--charcoal);border:1px solid var(--border-dim);padding:40px 36px;text-align:center;transition:border-color 0.25s,transform 0.25s;" onmouseover="this.style.borderColor='rgba(0,197,200,0.22)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.06)';this.style.transform='translateY(0)'">
+        <div class="contact-icon" style="margin:0 auto 20px;width:54px;height:54px;font-size:1.4rem;">📍</div>
+        <div class="contact-detail-label">Address</div>
+        <div style="font-size:0.85rem;color:var(--white);margin-top:6px;line-height:1.6;">3rd Floor, 3/4, 75C,<br>Kamdhenu Building, Park Street,<br>Kolkata-700016, West Bengal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <img src="With_White_background.png" alt="Logo" style="width:32px;height:32px;object-fit:contain;border-radius:50%;opacity:0.85;" />
+    <div class="footer-logo">RST Global Ventures</div>
+  </div>
+  <div class="footer-copy">© 2025 RST Global Ventures. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="#hero">Home</a>
+    <a href="#products">Products</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.borderBottomColor = window.scrollY > 60
+      ? 'rgba(0,197,200,0.2)' : 'rgba(255,255,255,0.06)';
+  });
+</script>
+</body>
+</html>
