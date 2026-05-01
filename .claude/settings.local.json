@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd /d \"r:\\\\Learning\\\\VS Code\\\\RST Website\")",
+      "Bash(dir /s)",
+      "PowerShell(Get-ChildItem \"r:\\\\Learning\\\\VS Code\\\\RST Website\" -Recurse | ForEach-Object { $_.FullName })"
+    ]
+  }
+}
